@@ -11,6 +11,8 @@
     "start": "concurrently \"vite\" \"node src/server/server.js\""
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "express": "^4.21.2",

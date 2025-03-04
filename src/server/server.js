@@ -9,9 +9,9 @@ const app = express();
 const __dirname = path.resolve(); 
 app.use(bodyParser.json());
 
-
+//sube
 app.use(cors({
-  origin: 'http://localhost:5173' // o la URL de tu frontend
+  origin: 'http://localhost:5173' 
 }));
 
 

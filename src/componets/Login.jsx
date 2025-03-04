@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,7 +11,12 @@ const Login = () => {
   const [role, setRole] = useState('Administrador');
   const [jsonData, setJsonData] = useState([]);
   const [error, setError] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
 
   useEffect(() => {
@@ -23,10 +30,10 @@ const Login = () => {
       })
         .then(response => {
           const contentType = response.headers.get('Content-Type');
-          console.log('Tipo de contenido recibido:', contentType); 
+          console.log('Tipo de contenido recibido:', contentType);
 
           if (contentType && contentType.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
-            return response.arrayBuffer(); 
+            return response.arrayBuffer();
           } else {
             throw new Error('El archivo no es un archivo Excel válido');
           }
@@ -69,7 +76,7 @@ const Login = () => {
     if (user && String(user?.password).trim() === String(password).trim() && user.role === role) {
       setError('');
       navigate('/home', { state: { user } });
-      console.log('success' , user);
+      console.log('success', user);
     } else {
       navigate('/');
       setError('Usuario ,contraseña o rol son incorrectos');
@@ -93,10 +100,16 @@ const Login = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
             <label className="form-label w-50">Password</label>
-            <input type="password" className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="d-flex">
+              <input className="form-control"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? 'text' : 'password'} name="password"
+              />
+              <span className="input-group-text" onClick={togglePasswordVisibility}>
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </span>
+            </div>
             <select name="role" className="form-select mt-4 mb-4" onChange={(e) => setRole(e.target.value)}>
               <option value="Administrador">Administrador</option>
               <option value="Trabajador">Trabajador</option>

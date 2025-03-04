@@ -26,10 +26,16 @@ const Home = () => {
             <div className="justify-content-center" >
               <h2>Bienvenido </h2> {user.role === 'Administrador' ? <p>tu rol es {user.role}</p> : <p> no eres administrador tu rol es {user.role}</p>}
 
-              <div>
+              <div className='justify-content-center'>
+                <figure className="figure w-25 p-4 ">
+                  <img src="/src/assets/img/logo_utn.jpg" className="figure-img img-fluid rounded" alt="..." />
+                </figure>
+              </div>
+              
+              <div className="mt-5">
                 <button onClick={handleRedirect}>Siguiente</button>
               </div>
-              <div>
+              <div className="mt-5">
                 <button onClick={handleLogout}>Log out</button>
               </div>
             </div>
@@ -42,11 +48,6 @@ const Home = () => {
 
 
 
-        {/* <div className='justify-content-center'>
-          <figure className="figure w-25 p-4 ">
-            <img src="/src/assets/img/logo_utn.jpg" className="figure-img img-fluid rounded" alt="..." />
-          </figure>
-        </div> */}
 
 
 
